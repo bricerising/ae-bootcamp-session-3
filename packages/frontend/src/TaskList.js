@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import EventIcon from '@mui/icons-material/Event';
 
-function TaskList({ onEdit }) {
+function TaskList({ onEdit, onPriorityChange }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -191,9 +191,9 @@ function TaskList({ onEdit }) {
                 )
               }
             />
-            <Box 
-              sx={{ 
-                position: 'absolute', 
+            <Box
+              sx={{
+                position: 'absolute',
                 right: 8,
                 top: '50%',
                 transform: 'translateY(-50%)',
@@ -203,6 +203,17 @@ function TaskList({ onEdit }) {
                 gap: 1
               }}
             >
+              <Box sx={{ display: 'flex', gap: 0.5 }}>
+                {['P1', 'P2', 'P3'].map((level) => (
+                  <button
+                    key={level}
+                    className={`priority-btn ${task.priority === level ? 'priority-selected' : 'priority-unselected'}`}
+                    onClick={() => onPriorityChange(task, level)}
+                  >
+                    {level}
+                  </button>
+                ))}
+              </Box>
               {task.due_date && (
                 <Chip
                   icon={<EventIcon sx={{ fontSize: 14 }} />}
@@ -220,9 +231,9 @@ function TaskList({ onEdit }) {
                   }}
                 />
               )}
-              <Box 
-                sx={{ 
-                  display: 'flex', 
+              <Box
+                sx={{
+                  display: 'flex',
                   gap: 0.5,
                   opacity: 0.7,
                   transition: 'opacity 0.2s',
@@ -231,8 +242,8 @@ function TaskList({ onEdit }) {
                   }
                 }}
               >
-                <IconButton 
-                  aria-label="edit" 
+                <IconButton
+                  aria-label="edit"
                   onClick={() => onEdit(task)}
                   size="small"
                   sx={{
@@ -244,8 +255,8 @@ function TaskList({ onEdit }) {
                 >
                   <EditIcon fontSize="small" />
                 </IconButton>
-                <IconButton 
-                  aria-label="delete" 
+                <IconButton
+                  aria-label="delete"
                   onClick={() => handleDelete(task.id)}
                   size="small"
                   sx={{

@@ -92,3 +92,26 @@ li:last-child {
   color: #d32f2f;
   font-weight: bold;
 }
+
+.priority-btn {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 32px;
+  text-align: center;
+}
+
+.priority-selected {
+  background-color: #07F2E6;
+  color: white;
+  border-color: #07F2E6;
+}
+
+.priority-unselected {
+  background-color: #7A7A7A;
+  color: white;
+  border-color: #7A7A7A;
+}
